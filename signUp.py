@@ -1,3 +1,7 @@
+from tkinter import *
+import tkinter.messagebox
+import sqlite3
+
 def signUp():
     signUp = Tk()
     signUp.geometry("1024x786")
