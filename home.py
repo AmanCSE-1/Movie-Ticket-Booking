@@ -1,3 +1,7 @@
+from tkinter import *
+import tkinter.messagebox
+from PIL import ImageTk, Image
+
 def createNew(base, new):
     base.destroy()
     new()
