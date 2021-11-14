@@ -171,7 +171,7 @@ def book(entry1, entry2, entry3, entry4, name, frame):
         
     server = smtplib.SMTP("smtp.gmail.com", 587)
     server.starttls()
-    server.login("project.python2424@gmail.com", "Python24@TRUE")
+    server.login("youremail@gmail.com", "yourpassword")
     
     msg = "Hi  " + str(username) +"\nYour Movie Ticket Booking has been successfully completed..!!!"
     msg += "\n\nThese are your booking details:\nMovie-Name :-   "+ name
