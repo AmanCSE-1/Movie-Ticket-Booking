@@ -1,10 +1,16 @@
+## Importing the Libraries
 from tkinter import *
 import tkinter.messagebox
-from PIL import ImageTk, Image
-
+import PIL.ImageTk
+import PIL.Image
 import sqlite3
 import json
 import smtplib
+
+
+## Importing the main module
+import home
+
 
 
 username = None
@@ -29,7 +35,7 @@ def movie():
     brandName.grid(row=0, column=0)
 
     space = Label(navbar, width=59, bg=bgColor).grid(row=0, column=1) 
-    button1 = Button(navbar, text="Home", padx=5, bg=bgColor, command=lambda: createNew(movie, home))
+    button1 = Button(navbar, text="Home", padx=5, bg=bgColor, command=lambda: home.createNew(movie, home))
     button1.grid(row=0, column=2)
 
     button2 = Button(navbar, text="Movies", padx=5, bg=bgColor)
@@ -68,14 +74,14 @@ def movie():
         bgColor3="#F1BB47"; fgColor3="#000066"
         banner = LabelFrame(bookWindow, height=580, width=400, bg=bgColor3)
         banner.place(x=0, y=0)
-        image = Image.open(path)
-        image = image.resize((350, 200), Image.ANTIALIAS)
-        test = ImageTk.PhotoImage(image)
+        image = PIL.Image.open(path)
+        image = image.resize((350, 200), PIL.Image.ANTIALIAS)
+        test = PIL.ImageTk.PhotoImage(image)
         main = Label(bookWindow, height=200, width=350, padx=5, pady=5, image=test, bg="#DEE2FF")
         main.image = test
         main.place(x=20, y=20)
         
-        with open("ESD/movieDetails.json") as jsonData:
+        with open("assets/movieDetails.json") as jsonData:
             details = json.load(jsonData)
             
         Label(bookWindow, text=name, font=('Cambria', 18, 'bold'), bg=bgColor3, fg=fgColor3).place(x=150, y=225)
@@ -110,28 +116,28 @@ def movie():
         bookB.place(x=100, y=500)
     
     def placeMovie(path, w, h, xcoordinate, ycoordinate, name):
-        image = Image.open(path)
-        image = image.resize((w-5, h-5), Image.ANTIALIAS)
-        test = ImageTk.PhotoImage(image)
+        image = PIL.Image.open(path)
+        image = image.resize((w-5, h-5), PIL.Image.ANTIALIAS)
+        test = PIL.ImageTk.PhotoImage(image)
         main = Label(banner, height=h, width=w, padx=5, pady=5, image=test, bg="#DEE2FF")
         main.image = test
         main.place(x=xcoordinate, y=ycoordinate)
-        button = Button(banner, width=24, height=2, text=name, bg="#DEE2FF", command=lambda:bookWindow(path, name))
+        button = Button(banner, width=24, height=2, text=name, bg="#DEE2FF", command=lambda: bookWindow(path, name))
         button.place(x=xcoordinate, y=ycoordinate+h+2)
     
     section1 = Label(banner, text="In Theatres", bg=bgColor1, fg="#DEE2FF", font=('Cambria',14, 'italic'))
     section1.place(x=40, y=165)
 
-    placeMovie("ESD/Homepage/Roohi.jpg", 172, 140, 40, 200, "Roohi")
-    placeMovie("ESD/Homepage/Aranya tamil.jpg", 172, 140, 340, 200, "Aranya")
-    placeMovie("ESD/Homepage/godzilla vs kong.jpg", 172, 140, 640, 200, "Godzilla vs Kong")
+    placeMovie("assets/images/Roohi.jpg", 172, 140, 40, 200, "Roohi")
+    placeMovie("assets/images/Aranya tamil.jpg", 172, 140, 340, 200, "Aranya")
+    placeMovie("assets/images/godzilla vs kong.jpg", 172, 140, 640, 200, "Godzilla vs Kong")
     
     section2 = Label(banner, text="Upcoming Movies", bg=bgColor1, fg="#DEE2FF", font=('Cambria',14, 'italic'))
     section2.place(x=40, y=445)
 
-    placeMovie("ESD/Homepage/sooryavanshi.jpg", 172, 140, 40, 480, "Sooryavanshi")
-    placeMovie("ESD/Homepage/black-widow.jpg", 172, 140, 340, 480, "Black Widow")
-    placeMovie("ESD/Homepage/saina.jpg", 172, 140, 640, 480, "Saina")
+    placeMovie("assets/images/sooryavanshi.jpg", 172, 140, 40, 480, "Sooryavanshi")
+    placeMovie("assets/images/black-widow.jpg", 172, 140, 340, 480, "Black Widow")
+    placeMovie("assets/images/saina.jpg", 172, 140, 640, 480, "Saina")
     
     movie.mainloop()
        
@@ -158,7 +164,7 @@ def book(entry1, entry2, entry3, entry4, name, frame):
         return
     
     try:
-        connection = sqlite3.connect('ESD/Homepage/movieTicket.db')
+        connection = sqlite3.connect('assets/movieTicket.db')
         cur = connection.cursor()
         cur.execute('''INSERT into booking (username, city, time, date, seat)
                         VALUES (?, ?, ?, ?, ?)''', (username, city, time, date, str(seat)))
