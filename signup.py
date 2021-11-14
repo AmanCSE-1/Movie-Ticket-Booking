@@ -1,6 +1,14 @@
+# Importing the Libraries
 from tkinter import *
 import tkinter.messagebox
 import sqlite3
+
+
+# Importing other modules
+import home
+import login
+
+
 
 def signUp():
     signUp = Tk()
@@ -53,14 +61,14 @@ def signUp():
         elif age=="":
             messagebox.showerror("Movie-Zone", "Age cannot be blank")
         else:
-            connection = sqlite3.connect('ESD/Homepage/movieTicket.db')
+            connection = sqlite3.connect('assets/movieTicket.db')
             cur = connection.cursor()
             cur.execute('''INSERT into user (username, password, email, age)
                             VALUES (?, ?, ?, ?)''', (username, password, email, age))
             cur.close()
             connection.commit()
             connection.close()
-            createNew(signUp, logIn)
+            createNew(signUp, login.logIn)
             
             
     signUpB = Button(box2, text="Create Account", width=15, bg=bgColor3, fg=fgColor1, font=('cambria', 14), 
