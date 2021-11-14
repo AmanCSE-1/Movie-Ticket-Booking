@@ -1,6 +1,14 @@
+## Importing the Libraries
 from tkinter import *
 import tkinter.messagebox
 import sqlite3
+
+
+# Importing other modules
+import home
+import movie
+
+
 
 def logIn():
     logIn = Tk()
@@ -49,7 +57,7 @@ def logIn():
             
         else:
             try:
-                connection = sqlite3.connect('ESD/Homepage/movieTicket.db')
+                connection = sqlite3.connect('assets/movieTicket.db')
                 cur = connection.cursor()
 
                 cur.execute('SELECT username, email FROM user WHERE username=? AND password=?', (username, password))
@@ -58,7 +66,7 @@ def logIn():
                 if row is None:
                     tkinter.messagebox.showerror("Movie-Zone", "Incorrect Credentials")
                 else:
-                    createNew(logIn, movie)
+                    home.createNew(logIn, movie.movie)
 
                 cur.close()
                 connection.commit()
