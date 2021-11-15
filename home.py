@@ -12,11 +12,13 @@ import login
 import movie
 
 
-
+## Function that destroys the old interface and creates a new one.
 def createNew(base, new):
     base.destroy()
     new()
 
+    
+## Main Function that defines the components of GUI to be placed.
 def home():
     home = Tk()
     home.geometry("1024x786")
@@ -34,7 +36,9 @@ def home():
     brandName = Label(navbar, text="Movie-Zone", font=('Cambria', 20) , bg=bgColor)
     brandName.grid(row=0, column=0)
 
-    space = Label(navbar, width=59, bg=bgColor).grid(row=0, column=1) 
+    space = Label(navbar, width=59, bg=bgColor).grid(row=0, column=1)
+    
+    # These are Buttons placed on Navbar
     button1 = Button(navbar, text="Home", padx=5, bg=bgColor)
     button1.grid(row=0, column=2)
 
@@ -75,6 +79,7 @@ def home():
                    command= lambda: createNew(home, login.logIn))
     logInB.place(x=340, y=250)
     
+    # To place an image on the banner 
     image = PIL.Image.open('assets/home.png')
     image = image.resize((320, 270), PIL.Image.ANTIALIAS)
     test = PIL.ImageTk.PhotoImage(image)
@@ -90,6 +95,8 @@ def home():
     banner2 = LabelFrame(home, height=720, width=1024, bg="#C4DACF", padx=70, pady=20)
     banner2.place(x=0, y=440)
     
+    # Function that place the image on the LabelFrame banner2 : 
+    # inputs path of image, width, height, xcoordinates and ycoordinates where the image has to be placed, name of the movie
     def placemovie2(path, w, h, xcoordinate, ycoordinate, name):
         image = PIL.Image.open(path)
         image = PIL.image.resize((w-5, h-5), PIL.Image.ANTIALIAS)
@@ -99,7 +106,9 @@ def home():
         main.place(x=xcoordinate, y=ycoordinate)
         button = Button(banner2, width=24, height=2, text=name, bg="#DEE2FF")
         button.place(x=xcoordinate, y=ycoordinate+h+2)
-    
+        
+        
+    # This label shows the exclusive offers available in the application
     section2 = Label(banner2, text="Exclusive Offers on Blockbuster Hit", bg=bgColor2, fg=fgColor2, font=('Cambria',14, 'italic'))
     section2.place(x=40, y=20)
 
@@ -107,6 +116,8 @@ def home():
     placemovie2("assets/images/black-widow.jpg", 172, 140, 340, 70, "Black Widow")
     placemovie2("assets/images/saina.jpg", 172, 140, 640, 70, "Sania")
     
+    # Running the application
     home.mainloop()
-    
+  
+# Call the function
 home()
