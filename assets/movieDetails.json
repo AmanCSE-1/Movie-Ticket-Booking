@@ -1,0 +1,31 @@
+{
+    "Roohi": {
+        "Genre" : "Comedy, Horror",
+        "Cast" : "Rajkumar Rao, Jahnvi Kapoor"
+    },
+
+    "Aranya": {
+        "Genre" : "Action, Thriller",
+        "Cast" : "Rana Duggabti"
+    },
+
+    "Godzilla vs Kong": {
+        "Genre" : "Sci Fiction, Action",
+        "Cast" : "Millie Bobby Brown, Alexander"
+    },
+
+    "Sooryavanshi": {
+        "Genre" : "Action, Thriller",
+        "Cast" : "Akshay Kumar, Katrina Kaif"
+    },
+
+    "Black Widow": {
+        "Genre" : "Action, Adventure",
+        "Cast" : "Scarlett Johansson, Florence Pugh"
+    },
+
+    "Saina": {
+        "Genre" : "Biopic, Sports",
+        "Cast" : "Parineeti Chopra, Manav Kaul"
+    }
+}
