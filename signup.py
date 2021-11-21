@@ -46,12 +46,15 @@ def signUp():
     entry4 = Entry(box2, width=10, bd=3)
     entry4.place(x=70, y=315)
     
+    # Function to insert new entries in the database
     def insert(entry1, entry2, entry3, entry4):
+        # Extract the user-entered values in the following fields
         username = entry1.get()
         password = entry2.get()
         email = entry3.get()
         age = entry4.get()
 
+        # If any of the field is blank, prompt an error to the user
         if username=="":
             messagebox.showerror("Movie-Zone", "Username cannot be blank")
         elif password=="":
@@ -61,13 +64,18 @@ def signUp():
         elif age=="":
             messagebox.showerror("Movie-Zone", "Age cannot be blank")
         else:
+            # Else if all the details are entered, connect to the database 
             connection = sqlite3.connect('assets/movieTicket.db')
             cur = connection.cursor()
+            # SQL Statement to insert/add new entries in the table `user`
             cur.execute('''INSERT into user (username, password, email, age)
                             VALUES (?, ?, ?, ?)''', (username, password, email, age))
+            
+            # Commit the chnages and close the connection
             cur.close()
             connection.commit()
             connection.close()
+            # Redirect to the login interface
             createNew(signUp, login.logIn)
             
             
