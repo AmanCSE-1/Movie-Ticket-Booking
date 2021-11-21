@@ -49,25 +49,33 @@ def logIn():
         global username
         global email
         
+        # Fetch the user input for username and password
         username = entry1.get()
         password = entry2.get()
 
+        # If the field is left blank, prompt an error message
         if username=="" and password=="":
             messagebox.showerror("Movie-Zone", "Please enter Username and Password")
             
         else:
             try:
+                # Connecting with the database
                 connection = sqlite3.connect('assets/movieTicket.db')
                 cur = connection.cursor()
 
+                # Execute SQL statement to select entries with same username and password
                 cur.execute('SELECT username, email FROM user WHERE username=? AND password=?', (username, password))
                 row = cur.fetchone()
                 email = row[1]
+                
+                # If the account credentials does not exist in the database
                 if row is None:
                     tkinter.messagebox.showerror("Movie-Zone", "Incorrect Credentials")
+                # Else, if the credentials are valid, redirect to movie boooking interface
                 else:
                     home.createNew(logIn, movie.movie)
 
+                # Close the connection, commit the chnages in database and close it.
                 cur.close()
                 connection.commit()
                 connection.close()
